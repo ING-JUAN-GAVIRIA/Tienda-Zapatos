@@ -39,8 +39,6 @@ def create_app():
                 db.create_all()
             app._tables_created = True
 
-    # ------------------ RUTAS PRINCIPALES ------------------
-
     @app.route("/")
     def index():
         products = Product.get_all()
@@ -53,7 +51,6 @@ def create_app():
             abort(404)
         return render_template("product_view.html", product=product)
 
-    # ------------------ USUARIOS ------------------
 
     @app.route("/signup/", methods=["GET", "POST"])
     def signup():
@@ -105,7 +102,6 @@ def create_app():
             flash("Cerraste sesión.", "info")
         return redirect(url_for("index"))
 
-    # ------------------ PRODUCTOS ------------------
 
     @app.route("/product/add", methods=["GET", "POST"])
     @login_required
@@ -174,7 +170,6 @@ def create_app():
             flash('Error al eliminar.', 'danger')
         return redirect(url_for('index'))
 
-    # ------------------ CARRITO ------------------
 
     def _get_cart():
         """Obtiene el carrito desde la sesión."""

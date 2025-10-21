@@ -8,7 +8,6 @@
     <form method="post">
       {{ form.hidden_tag() }}
 
-      <!-- Campo Email -->
       <div class="mb-3">
         <label class="form-label fw-semibold">{{ form.email.label }}</label>
         {{ form.email(class="form-control form-control-lg", placeholder="tu@email.com") }}
@@ -17,7 +16,6 @@
         {% endfor %}
       </div>
 
-      <!-- Campo Contraseña -->
       <div class="mb-3">
         <label class="form-label fw-semibold">{{ form.password.label }}</label>
         {{ form.password(class="form-control form-control-lg", placeholder="••••••••") }}
@@ -26,16 +24,13 @@
         {% endfor %}
       </div>
 
-      <!-- Recordarme -->
       <div class="form-check mb-3">
         {{ form.remember_me(class="form-check-input") }}
         <label class="form-check-label">{{ form.remember_me.label.text }}</label>
       </div>
 
-      <!-- Botón -->
       {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
 
-      <!-- Enlace a registro -->
       <div class="text-center mt-3">
         <p class="mb-0 text-secondary">¿No tienes una cuenta?
           <a href="{{ url_for('signup') }}" class="text-decoration-none text-primary fw-semibold">Crear cuenta</a>

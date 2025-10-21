@@ -8,9 +8,7 @@ import time
 
 db = SQLAlchemy()
 
-# ============================================================
-# MODELO DE USUARIO
-# ============================================================
+
 class User(UserMixin, db.Model):
     __tablename__ = "users"
 
@@ -21,9 +19,6 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    # -------------------------------
-    # Métodos de utilidad
-    # -------------------------------
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
 
@@ -50,9 +45,6 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f"<User {self.email}>"
 
-# ============================================================
-# MODELO DE PRODUCTO
-# ============================================================
 class Product(db.Model):
     __tablename__ = "products"
 
@@ -68,9 +60,6 @@ class Product(db.Model):
 
     owner = db.relationship("User", backref=db.backref("products", lazy=True))
 
-    # -------------------------------
-    # Métodos de utilidad
-    # -------------------------------
     def _generate_unique_slug(self):
         base = slugify(self.title)
         if not base:
@@ -114,9 +103,7 @@ class Product(db.Model):
     def __repr__(self):
         return f"<Product {self.title} ({self.slug})>"
 
-# ============================================================
-# MODELO DE ITEM EN CARRITO
-# ============================================================
+
 class CartItem(db.Model):
     __tablename__ = "cart_items"
 

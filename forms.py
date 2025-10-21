@@ -28,7 +28,7 @@ class LoginForm(FlaskForm):
 class ProductForm(FlaskForm):
     title = StringField("Nombre del zapato", validators=[DataRequired(), Length(min=2, max=200)])
     description = TextAreaField("Descripción", validators=[DataRequired(), Length(min=10)])
-    price_cents = DecimalField("Precio (en unidades monetarias)", validators=[DataRequired(), NumberRange(min=0)])
+    price = DecimalField("Precio (en pesos)", validators=[DataRequired(), NumberRange(min=0)])
     size = StringField("Talla", validators=[Length(max=50)])
     image = FileField("Imagen", validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Solo imágenes')])
     submit = SubmitField("Guardar")
