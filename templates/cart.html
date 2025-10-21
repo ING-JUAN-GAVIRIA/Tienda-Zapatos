@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Carrito{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-light">
+  <h2 class="mb-4 text-center">🛍 Tu carrito de compras</h2>
+
+  {% if items %}
+  <div class="table-responsive">
+    <table class="table table-dark table-striped align-middle">
+      <thead class="table-secondary text-dark">
+        <tr>
+          <th>Imagen</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+        <tr>
+          <td style="width: 100px;">
+            {% if it.product.image_filename %}
+              <img src="{{ url_for('static', filename='uploads/' ~ it.product.image_filename) }}" class="img-fluid rounded" alt="{{ it.product.title }}">
+            {% else %}
+              <span class="text-muted">Sin imagen</span>
+            {% endif %}
+          </td>
+          <td>
+            <h5>{{ it.product.title }}</h5>
+            <p class="small text-muted">{{ it.product.description[:60] }}...</p>
+          </td>
+          <td>{{ it.qty }}</td>
+          <td class="fw-bold">${{ '%.2f'|format(it.subtotal_cents / 100) }}</td>
+          <td>
+            <form method="post" action="{{ url_for('cart_remove', product_id=it.product.id) }}" style="display:inline;">
+              <button class="btn btn-sm btn-danger">
+                <i class="bi bi-trash"></i> Quitar
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h4>Total: <span class="text-success fw-bold">${{ '%.2f'|format(total_cents / 100) }}</span></h4>
+
+    <div>
+      <form method="post" action="{{ url_for('cart_clear') }}" style="display:inline;">
+        <button class="btn btn-outline-danger me-2">Vaciar carrito</button>
+      </form>
+      <a href="{{ url_for('index') }}" class="btn btn-success">Seguir comprando</a>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="text-center mt-5">
+    <p class="lead text-muted">Tu carrito está vacío 🛒</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Ver productos</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Crear cuenta{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100" style="background: linear-gradient(135deg);">
+  <div class="card shadow-lg p-4 border-0" style="width: 100%; max-width: 400px; border-radius: 15px;">
+    <h3 class="text-center mb-4 fw-bold text-primary">Crear cuenta</h3>
+
+    <form method="post">
+      {{ form.hidden_tag() }}
+
+      <!-- Campo Username -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{{ form.username.label }}</label>
+        {{ form.username(class="form-control form-control-lg", placeholder="Tu nombre de usuario") }}
+        {% for e in form.username.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Campo Email -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{{ form.email.label }}</label>
+        {{ form.email(class="form-control form-control-lg", placeholder="tu@email.com") }}
+        {% for e in form.email.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{{ form.password.label }}</label>
+        {{ form.password(class="form-control form-control-lg", placeholder="••••••••") }}
+        {% for e in form.password.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Botón -->
+      {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+
+      <!-- Enlace a login -->
+      <div class="text-center mt-3">
+        <p class="mb-0 text-secondary">¿Ya tienes una cuenta?
+          <a href="{{ url_for('login') }}" class="text-decoration-none text-primary fw-semibold">Iniciar sesión</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

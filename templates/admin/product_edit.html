@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Editar producto{% endblock %}
+{% block content %}
+<h2>Editar producto</h2>
+<form method="post" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.title.label(class="form-label") }}
+    {{ form.title(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.description.label(class="form-label") }}
+    {{ form.description(class="form-control", rows=4) }}
+  </div>
+  <div class="mb-3">
+    {{ form.price_cents.label(class="form-label") }}
+    {{ form.price_cents(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.size.label(class="form-label") }}
+    {{ form.size(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.image.label(class="form-label") }}
+    {{ form.image(class="form-control") }}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
